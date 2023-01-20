@@ -12,19 +12,21 @@ import {
   REQUEST_OTP,
   REQUEST_OTP_SUCCESS,
   REQUEST_OTP_FAILED,
+  CHANGE_USER_STATUS,
 } from '../types';
 
 const INITIAL_STATE = {
   email: null,
   password: null,
+  status: 0,
 };
 
 export const authreducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case FETCH_USER:
+    case CHANGE_USER_STATUS:
       return {
         ...state,
-        loading: true,
+        status: action.payload.status,
       };
     case FETCH_USER_SUCCESS:
       return {
