@@ -222,7 +222,7 @@ export const checkLogin = () => dispatch => firebase => {
     dispatch({
       type: CHANGE_USER_STATUS,
       payload: {
-        status: 0,
+        status: 2,
       },
     });
   }
