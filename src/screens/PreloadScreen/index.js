@@ -32,10 +32,6 @@ export function PreloadScreen({navigation}) {
   useEffect(() => {
     dispatch(checkLogin());
     directPages();
-  }, []);
-
-  useEffect(() => {
-    directPages();
   }, [status]);
 
   return (
