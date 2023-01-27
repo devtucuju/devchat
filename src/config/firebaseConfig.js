@@ -1,8 +1,16 @@
+import {
+  API_KEY,
+  AUTH_DOMAIN,
+  PROJECT_ID,
+  STORAGE_BUCKET,
+  MESSAGING_SENDERID,
+  APPID,
+} from '@env';
 module.exports.firebaseConfig = {
-  apiKey: 'AIzaSyATUacdxb8k3But7q_RyKThDieDjW7e4VY',
-  authDomain: 'devchat-devtucuju.firebaseapp.com',
-  projectId: 'devchat-devtucuju',
-  storageBucket: 'devchat-devtucuju.appspot.com',
-  messagingSenderId: '209500916979',
-  appId: '1:209500916979:web:1d795bfee805366c4ffb86',
+  apiKey: API_KEY,
+  authDomain: AUTH_DOMAIN,
+  projectId: PROJECT_ID,
+  storageBucket: STORAGE_BUCKET,
+  messagingSenderId: MESSAGING_SENDERID,
+  appId: APPID,
 };
