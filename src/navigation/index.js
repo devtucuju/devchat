@@ -7,7 +7,7 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 //Screens
 import {LoginScreen} from '../screens/LoginScreen';
-import {RegisterScreen} from '../screens/RegisterScreen';
+import {SignUpScreen} from '../screens/SignUpScreen';
 import {HomeScreen} from '../screens/HomeScreen';
 import {PreloadScreen} from '../screens/PreloadScreen';
 import {useSelector} from 'react-redux';
@@ -39,11 +39,7 @@ export function Router() {
           component={LoginScreen}
           options={{headerShown: false}}
         />
-        <Stack.Screen
-          name="Register"
-          component={RegisterScreen}
-          options={{headerShown: false}}
-        />
+        <Stack.Screen name="SignUp" component={SignUpScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

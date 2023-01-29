@@ -1,9 +1,10 @@
-import {useContext, useEffect} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {useContext, useEffect, useState} from 'react';
+import {View, Text, StyleSheet, ActivityIndicator} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {FirebaseContext} from '../../context/firebase';
 
 export function PreloadScreen({navigation}) {
+  const [isLoading, setIsLoading] = useState(true);
   const status = useSelector(state => state.auth.status);
   const dispatch = useDispatch();
   const {api} = useContext(FirebaseContext);
@@ -12,12 +13,14 @@ export function PreloadScreen({navigation}) {
   const directPages = () => {
     switch (status) {
       case 1:
+        setIsLoading(false);
         navigation.reset({
           index: 0,
           routes: [{name: 'Register'}],
         });
         break;
       case 2:
+        setIsLoading(false);
         navigation.reset({
           index: 0,
           routes: [{name: 'Home'}],
@@ -30,15 +33,17 @@ export function PreloadScreen({navigation}) {
   };
 
   useEffect(() => {
-    dispatch(checkLogin());
     directPages();
+    dispatch(checkLogin());
   }, [status]);
 
-  return (
-    <View style={styles.container}>
-      <Text>Carregando...{status}</Text>
-    </View>
-  );
+  if (isLoading) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator />
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({

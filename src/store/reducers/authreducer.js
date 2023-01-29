@@ -16,6 +16,8 @@ import {
 } from '../types';
 
 const INITIAL_STATE = {
+  uid: '',
+  name: '',
   email: null,
   password: null,
   status: 0, //0 -> sem verificação 1 -> usuario logado 2 -> usuario não logado
