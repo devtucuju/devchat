@@ -12,6 +12,9 @@ import {
   REQUEST_OTP_SUCCESS,
   REQUEST_OTP_FAILED,
   CHANGE_USER_STATUS,
+  CHANGE_EMAIL,
+  CHANGE_NAME,
+  CHANGE_PASSWORD,
 } from '../types';
 
 import store from '../../store/store';
@@ -226,6 +229,31 @@ export const checkLogin = () => dispatch => firebase => {
       },
     });
   }
+};
+export const changeName = name => {
+  return {
+    type: CHANGE_NAME,
+    payload: {
+      name,
+    },
+  };
+};
+
+export const changeEmail = email => {
+  return {
+    type: CHANGE_EMAIL,
+    payload: {
+      email,
+    },
+  };
+};
+export const changePassword = password => {
+  return {
+    type: CHANGE_PASSWORD,
+    payload: {
+      password,
+    },
+  };
 };
 
 export const mainSignUp = regData => async firebase => {

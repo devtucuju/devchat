@@ -23,6 +23,9 @@ import {
   monitorProfileChanges,
   fetchProfile,
   checkLogin,
+  changeEmail,
+  changeName,
+  changePassword,
 } from '../store/actions/authactions';
 
 const FirebaseContext = createContext(null);
@@ -45,6 +48,9 @@ const FirebaseProvider = ({config, children}) => {
       authRef: app.auth(),
       api: {
         checkLogin: () => dispatch => checkLogin()(dispatch)(firebase),
+        changeEmail: email => changeEmail(email),
+        changeName: name => changeName(name),
+        changePassword: password => changePassword(password),
       },
     };
   }

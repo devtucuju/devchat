@@ -13,12 +13,15 @@ import {
   REQUEST_OTP_SUCCESS,
   REQUEST_OTP_FAILED,
   CHANGE_USER_STATUS,
+  CHANGE_EMAIL,
+  CHANGE_NAME,
+  CHANGE_PASSWORD,
 } from '../types';
 
 const INITIAL_STATE = {
   uid: '',
   name: '',
-  email: null,
+  email: 'devtucuju@gmail.com',
   password: null,
   status: 0, //0 -> sem verificação 1 -> usuario logado 2 -> usuario não logado
 };
@@ -29,6 +32,21 @@ export const authreducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         status: action.payload.status,
+      };
+    case CHANGE_EMAIL:
+      return {
+        ...state,
+        email: action.payload.email,
+      };
+    case CHANGE_NAME:
+      return {
+        ...state,
+        name: action.payload.name,
+      };
+    case CHANGE_PASSWORD:
+      return {
+        ...state,
+        password: action.payload.password,
       };
     case FETCH_USER_SUCCESS:
       return {
