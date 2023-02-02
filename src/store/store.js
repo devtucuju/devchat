@@ -5,6 +5,4 @@ import {reducers} from './reducers';
 
 let middleware = [thunk, logger];
 
-const store = createStore(reducers, {}, applyMiddleware(...middleware));
-
-export {store};
+export default createStore(reducers, {}, applyMiddleware(...middleware));

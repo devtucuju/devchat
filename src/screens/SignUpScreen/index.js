@@ -13,14 +13,14 @@ export function SignUpScreen() {
   const {name, email, password} = useSelector(state => state.auth);
   const dispatch = useDispatch();
   const {api} = useContext(FirebaseContext);
-  const {changeEmail, changeName, changePassword} = api;
+  const {changeEmail, changeName, changePassword, signUp} = api;
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Cadastro</Text>
       <TextInput
         style={styles.input}
-        placeholder="Email"
+        placeholder="Name"
         onChangeText={text => dispatch(changeName(text))}
         value={name}
       />
@@ -37,7 +37,9 @@ export function SignUpScreen() {
         value={password}
         secureTextEntry
       />
-      <TouchableOpacity style={styles.button} onPress={() => {}}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => dispatch(signUp(name, email, password))}>
         <Text style={styles.buttonText}>Registrar</Text>
       </TouchableOpacity>
     </View>

@@ -16,6 +16,7 @@ import {
   CHANGE_EMAIL,
   CHANGE_NAME,
   CHANGE_PASSWORD,
+  CHANGE_UID,
 } from '../types';
 
 const INITIAL_STATE = {
@@ -47,6 +48,11 @@ export const authreducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         password: action.payload.password,
+      };
+    case CHANGE_UID:
+      return {
+        ...state,
+        uid: action.payload.uid,
       };
     case FETCH_USER_SUCCESS:
       return {

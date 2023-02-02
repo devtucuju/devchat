@@ -15,6 +15,7 @@ import {
   CHANGE_EMAIL,
   CHANGE_NAME,
   CHANGE_PASSWORD,
+  CHANGE_UID,
 } from '../types';
 
 import store from '../../store/store';
@@ -229,6 +230,42 @@ export const checkLogin = () => dispatch => firebase => {
       },
     });
   }
+};
+export const signUp = (name, email, password) => dispatch => firebase => {
+  const {auth, singleUserRef} = firebase;
+  auth
+    .createUserWithEmailAndPassword(email, password)
+    .then(user => {
+      let uid = auth.currentUser.uid;
+      singleUserRef(uid).set({
+        name,
+      });
+      dispatch({
+        type: CHANGE_UID,
+        payload: {
+          uid,
+        },
+      });
+    })
+    .catch(error => {
+      console.log(error);
+      switch (error.code) {
+        case 'auth/email-already-in-use':
+          alert('Email já utilizado');
+          break;
+        case 'auth/invalid-email':
+          alert('Email inválido');
+          break;
+        case 'auth/operation-not-allowed':
+          alert('Tente novamente mais tarde!');
+          break;
+        case 'auth/weak-password':
+          alert('Digite uma senha forte!');
+          break;
+        default:
+          break;
+      }
+    });
 };
 export const changeName = name => {
   return {

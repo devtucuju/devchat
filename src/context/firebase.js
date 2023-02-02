@@ -5,24 +5,26 @@ import 'firebase/database';
 import 'firebase/auth';
 import 'firebase/firestore';
 
+import store from '../store/store';
 import {
-  fetchUser,
-  mainSignUp,
-  mobileSignIn,
-  facebookSignIn,
-  appleSignIn,
-  signOut,
-  updateProfile,
-  clearLoginError,
-  updatePushToken,
-  updateProfileImage,
-  requestPhoneOtpDevice,
-  deleteUser,
-  validateReferer,
-  checkUserExists,
-  monitorProfileChanges,
-  fetchProfile,
+  // fetchUser,
+  // mainSignUp,
+  // mobileSignIn,
+  // facebookSignIn,
+  // appleSignIn,
+  // signOut,
+  // updateProfile,
+  // clearLoginError,
+  // updatePushToken,
+  // updateProfileImage,
+  // requestPhoneOtpDevice,
+  // deleteUser,
+  // validateReferer,
+  // checkUserExists,
+  // monitorProfileChanges,
+  // fetchProfile,
   checkLogin,
+  signUp,
   changeEmail,
   changeName,
   changePassword,
@@ -46,8 +48,12 @@ const FirebaseProvider = ({config, children}) => {
       database: app.database(),
       auth: app.auth(),
       authRef: app.auth(),
+      usersRef: app.database().ref('users'),
+      singleUserRef: uid => app.database().ref('users/' + uid),
       api: {
         checkLogin: () => dispatch => checkLogin()(dispatch)(firebase),
+        signUp: (name, email, password) => dispatch =>
+          signUp(name, email, password)(dispatch)(firebase),
         changeEmail: email => changeEmail(email),
         changeName: name => changeName(name),
         changePassword: password => changePassword(password),
@@ -62,4 +68,4 @@ const FirebaseProvider = ({config, children}) => {
   );
 };
 
-export {FirebaseContext, FirebaseProvider};
+export {FirebaseContext, FirebaseProvider, store};
