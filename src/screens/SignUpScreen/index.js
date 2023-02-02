@@ -1,19 +1,27 @@
-import React, {useState, useContext} from 'react';
+import React, {useEffect, useContext} from 'react';
 import {
   View,
   TextInput,
   Text,
   TouchableOpacity,
   StyleSheet,
+  Keyboard,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {FirebaseContext} from '../../context/firebase';
 
-export function SignUpScreen() {
-  const {name, email, password} = useSelector(state => state.auth);
+export function SignUpScreen({navigation}) {
+  const {name, email, password, status} = useSelector(state => state.auth);
   const dispatch = useDispatch();
   const {api} = useContext(FirebaseContext);
   const {changeEmail, changeName, changePassword, signUp} = api;
+
+  useEffect(() => {
+    if (status === 1) {
+      Keyboard.dismiss();
+      navigation.navigate('Chat');
+    }
+  }, [status]);
 
   return (
     <View style={styles.container}>

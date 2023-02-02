@@ -52,6 +52,7 @@ export const authreducer = (state = INITIAL_STATE, action) => {
     case CHANGE_UID:
       return {
         ...state,
+        status: 1,
         uid: action.payload.uid,
       };
     case FETCH_USER_SUCCESS:

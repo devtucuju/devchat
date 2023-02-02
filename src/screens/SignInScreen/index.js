@@ -1,24 +1,31 @@
-import React, {useState, useContext} from 'react';
+import React, {useEffect, useContext} from 'react';
 import {
   View,
   TextInput,
   Text,
   TouchableOpacity,
   StyleSheet,
+  Keyboard,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {FirebaseContext} from '../../context/firebase';
 
-export function SignInScreen() {
-  const {email, password, uid} = useSelector(state => state.auth);
+export function SignInScreen({navigation}) {
+  const {email, password, status} = useSelector(state => state.auth);
   const dispatch = useDispatch();
   const {api} = useContext(FirebaseContext);
   const {changeEmail, changePassword, signIn} = api;
 
+  useEffect(() => {
+    if (status === 1) {
+      Keyboard.dismiss();
+      navigation.navigate('Chat');
+    }
+  }, [status]);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Login</Text>
-      <Text style={styles.title}>Usuário Logado: {uid}</Text>
       <TextInput
         style={styles.input}
         placeholder="Email"

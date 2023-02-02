@@ -10,6 +10,7 @@ import {SignInScreen} from '../screens/SignInScreen';
 import {SignUpScreen} from '../screens/SignUpScreen';
 import {HomeScreen} from '../screens/HomeScreen';
 import {PreloadScreen} from '../screens/PreloadScreen';
+import {ChatScreen} from '../screens/ChatScreen';
 import {useSelector} from 'react-redux';
 import {FirebaseContext} from '../context/firebase';
 
@@ -33,9 +34,9 @@ export function Router() {
           component={HomeScreen}
           options={{headerShown: false}}
         />
-
         <Stack.Screen name="SignIn" component={SignInScreen} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />
+        <Stack.Screen name="Chat" component={ChatScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
