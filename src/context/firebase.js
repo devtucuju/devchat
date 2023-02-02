@@ -25,6 +25,7 @@ import {
   // fetchProfile,
   checkLogin,
   signUp,
+  signIn,
   changeEmail,
   changeName,
   changePassword,
@@ -54,6 +55,8 @@ const FirebaseProvider = ({config, children}) => {
         checkLogin: () => dispatch => checkLogin()(dispatch)(firebase),
         signUp: (name, email, password) => dispatch =>
           signUp(name, email, password)(dispatch)(firebase),
+        signIn: (email, password) => dispatch =>
+          signIn(email, password)(dispatch)(firebase),
         changeEmail: email => changeEmail(email),
         changeName: name => changeName(name),
         changePassword: password => changePassword(password),

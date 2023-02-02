@@ -4,12 +4,15 @@ export function HomeScreen({navigation}) {
   function signup() {
     navigation.navigate('SignUp');
   }
+  function signin() {
+    navigation.navigate('SignIn');
+  }
 
   return (
     <View style={styles.container}>
       <Text style={styles.h1}>DevChat 1.0</Text>
       <View style={styles.buttonArea}>
-        <Button onPress={() => {}} title="SignIn" />
+        <Button onPress={() => signin()} title="SignIn" />
         <Button onPress={() => signup()} title="SignUp" />
       </View>
     </View>

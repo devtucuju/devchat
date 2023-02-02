@@ -6,7 +6,7 @@ import {
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 //Screens
-import {LoginScreen} from '../screens/LoginScreen';
+import {SignInScreen} from '../screens/SignInScreen';
 import {SignUpScreen} from '../screens/SignUpScreen';
 import {HomeScreen} from '../screens/HomeScreen';
 import {PreloadScreen} from '../screens/PreloadScreen';
@@ -34,11 +34,7 @@ export function Router() {
           options={{headerShown: false}}
         />
 
-        <Stack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{headerShown: false}}
-        />
+        <Stack.Screen name="SignIn" component={SignInScreen} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />
       </Stack.Navigator>
     </NavigationContainer>

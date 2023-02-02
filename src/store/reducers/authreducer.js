@@ -22,7 +22,7 @@ import {
 const INITIAL_STATE = {
   uid: '',
   name: '',
-  email: 'devtucuju@gmail.com',
+  email: '',
   password: null,
   status: 0, //0 -> sem verificação 1 -> usuario logado 2 -> usuario não logado
 };

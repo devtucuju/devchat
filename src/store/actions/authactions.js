@@ -231,6 +231,38 @@ export const checkLogin = () => dispatch => firebase => {
     });
   }
 };
+export const signIn = (email, password) => dispatch => firebase => {
+  const {auth, singleUserRef} = firebase;
+  auth
+    .signInWithEmailAndPassword(email, password)
+    .then(user => {
+      let uid = auth.currentUser.uid;
+      dispatch({
+        type: CHANGE_UID,
+        payload: {
+          uid,
+        },
+      });
+    })
+    .catch(error => {
+      switch (error.code) {
+        case 'auth/user-disabled':
+          alert('Usuário desativado');
+          break;
+        case 'auth/invalid-email':
+          alert('Email inválido');
+          break;
+        case 'auth/user-not-found':
+          alert('Usuário não existe');
+          break;
+        case 'auth/wrong-password':
+          alert('Email e/ou senha errados!');
+          break;
+        default:
+          break;
+      }
+    });
+};
 export const signUp = (name, email, password) => dispatch => firebase => {
   const {auth, singleUserRef} = firebase;
   auth
@@ -248,7 +280,6 @@ export const signUp = (name, email, password) => dispatch => firebase => {
       });
     })
     .catch(error => {
-      console.log(error);
       switch (error.code) {
         case 'auth/email-already-in-use':
           alert('Email já utilizado');
