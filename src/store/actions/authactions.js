@@ -214,22 +214,23 @@ export const validateReferer = referralId => async firebase => {
 
 export const checkLogin = () => dispatch => firebase => {
   const {auth} = firebase;
-  let user = auth.currentUser;
-  if (user) {
-    dispatch({
-      type: CHANGE_USER_STATUS,
-      payload: {
-        status: 1,
-      },
-    });
-  } else {
-    dispatch({
-      type: CHANGE_USER_STATUS,
-      payload: {
-        status: 2,
-      },
-    });
-  }
+  auth.onAuthStateChanged(user => {
+    if (user) {
+      dispatch({
+        type: CHANGE_UID,
+        payload: {
+          uid: user.uid,
+        },
+      });
+    } else {
+      dispatch({
+        type: CHANGE_USER_STATUS,
+        payload: {
+          status: 2,
+        },
+      });
+    }
+  });
 };
 export const signIn = (email, password) => dispatch => firebase => {
   const {auth, singleUserRef} = firebase;

@@ -1,11 +1,11 @@
 import {useContext, useEffect, useState} from 'react';
-import {View, Text, StyleSheet, ActivityIndicator} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {FirebaseContext} from '../../context/firebase';
 
 export function ChatScreen({navigation}) {
   const [isLoading, setIsLoading] = useState(true);
-  const status = useSelector(state => state.auth.status);
+  const {status, uid} = useSelector(state => state.auth);
   const dispatch = useDispatch();
   const {api} = useContext(FirebaseContext);
   const {checkLogin} = api;
@@ -13,7 +13,9 @@ export function ChatScreen({navigation}) {
   if (isLoading) {
     return (
       <View style={styles.container}>
-        <Text>Chat</Text>
+        <Text>
+          Chat-{status}-{uid}
+        </Text>
       </View>
     );
   }

@@ -16,7 +16,7 @@ export function PreloadScreen({navigation}) {
         setIsLoading(false);
         navigation.reset({
           index: 0,
-          routes: [{name: 'Register'}],
+          routes: [{name: 'SignUp'}],
         });
         break;
       case 2:
