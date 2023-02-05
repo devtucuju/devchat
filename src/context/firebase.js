@@ -12,7 +12,7 @@ import {
   // mobileSignIn,
   // facebookSignIn,
   // appleSignIn,
-  // signOut,
+  signOut,
   // updateProfile,
   // clearLoginError,
   // updatePushToken,
@@ -57,6 +57,7 @@ const FirebaseProvider = ({config, children}) => {
           signUp(name, email, password)(dispatch)(firebase),
         signIn: (email, password) => dispatch =>
           signIn(email, password)(dispatch)(firebase),
+        signOut: () => dispatch => signOut()(dispatch)(firebase),
         changeEmail: email => changeEmail(email),
         changeName: name => changeName(name),
         changePassword: password => changePassword(password),
