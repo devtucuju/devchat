@@ -1,30 +1,16 @@
-import {useContext, useEffect, useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
-import {FirebaseContext} from '../../context/firebase';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {ChatListScreen} from '../ChatListScreen';
+import {ContactListScreen} from '../ContactListScreen';
+import {SettingsScreen} from '../SettingsScreen';
 
-export function ChatScreen({navigation}) {
-  const [isLoading, setIsLoading] = useState(true);
-  const {status, uid} = useSelector(state => state.auth);
-  const dispatch = useDispatch();
-  const {api} = useContext(FirebaseContext);
-  const {checkLogin} = api;
+const {Navigator, Screen} = createBottomTabNavigator();
 
-  if (isLoading) {
-    return (
-      <View style={styles.container}>
-        <Text>
-          Chat-{status}-{uid}
-        </Text>
-      </View>
-    );
-  }
+export function TabNavigator() {
+  return (
+    <Navigator>
+      <Screen name="ChatList" component={ChatListScreen} />
+      <Screen name="ContactList" component={ContactListScreen} />
+      <Screen name="Settings" component={SettingsScreen} />
+    </Navigator>
+  );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
