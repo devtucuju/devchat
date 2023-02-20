@@ -2,183 +2,181 @@ import {
   FETCH_ALL_USERS,
   FETCH_ALL_USERS_SUCCESS,
   FETCH_ALL_USERS_FAILED,
-  EDIT_USER,
-  EDIT_USER_SUCCESS,
-  EDIT_USER_FAILED,
-  DELETE_USER,
-  DELETE_USER_SUCCESS,
-  DELETE_USER_FAILED,
-  FETCH_ALL_USERS_STATIC,
-  FETCH_ALL_USERS_STATIC_SUCCESS,
-  FETCH_ALL_USERS_STATIC_FAILED
-} from "../store/types";
+  // EDIT_USER,
+  // EDIT_USER_SUCCESS,
+  // EDIT_USER_FAILED,
+  // DELETE_USER,
+  // DELETE_USER_SUCCESS,
+  // DELETE_USER_FAILED,
+  // FETCH_ALL_USERS_STATIC,
+  // FETCH_ALL_USERS_STATIC_SUCCESS,
+  // FETCH_ALL_USERS_STATIC_FAILED,
+} from '../types';
 
-export const fetchUsers = () => (dispatch) => (firebase) => {
+// export const getUsers = () => dispatch => firebase => {
+//   const {usersRef} = firebase;
 
-  const {
-    usersRef
-  } = firebase;
+//   dispatch({
+//     type: FETCH_ALL_USERS,
+//     payload: null,
+//   });
+//   usersRef.on('value', snapshot => {
+//     if (snapshot.val()) {
+//       const data = snapshot.val();
+//       // const arr = Object.keys(data)
+//       //   .filter(i => data[i].usertype != 'admin')
+//       //   .map(i => {
+//       //     data[i].id = i;
+//       //     return data[i];
+//       //   });
+//       dispatch({
+//         type: FETCH_ALL_USERS_SUCCESS,
+//         payload: {users: data},
+//       });
+//     } else {
+//       dispatch({
+//         type: FETCH_ALL_USERS_FAILED,
+//         payload: 'No users available.',
+//       });
+//     }
+//   });
+// };
 
-  dispatch({
-    type: FETCH_ALL_USERS,
-    payload: null
-  });
-  usersRef.on("value", snapshot => {
-    if (snapshot.val()) {
-      const data = snapshot.val();
-      const arr = Object.keys(data)
-      .filter(i => data[i].usertype!='admin')
-      .map(i => {
-        data[i].id = i;
-        return data[i];
-      });
-      dispatch({
-        type: FETCH_ALL_USERS_SUCCESS,
-        payload: arr
-      });
-    } else {
-      dispatch({
-        type: FETCH_ALL_USERS_FAILED,
-        payload: "No users available."
-      });
-    }
-  });
-};
-
-
-export const fetchUsersOnce = () => (dispatch) => (firebase) => {
-
-  const {
-    usersRef
-  } = firebase;
-
-  dispatch({
-    type: FETCH_ALL_USERS_STATIC,
-    payload: null
-  });
-  usersRef.once("value", snapshot => {
-    if (snapshot.val()) {
-      const data = snapshot.val();
-      const arr = Object.keys(data)
-      .map(i => {
-        data[i].id = i;
-        return data[i];
-      });
-      dispatch({
-        type: FETCH_ALL_USERS_STATIC_SUCCESS,
-        payload: arr
-      });
-    } else {
-      dispatch({
-        type: FETCH_ALL_USERS_STATIC_FAILED,
-        payload: "No users available."
-      });
-    }
-  });
-};
-
-
-export const fetchDrivers = () => (dispatch) => (firebase) => {
-
-  const {
-    usersRef
-  } = firebase;
+export const getUsers = () => dispatch => firebase => {
+  const {usersRef} = firebase;
 
   dispatch({
     type: FETCH_ALL_USERS,
-    payload: null
+    payload: null,
   });
-  
-  usersRef.orderByChild("queue").equalTo(false).once("value", snapshot => {
+  usersRef.once('value', snapshot => {
     if (snapshot.val()) {
-      const data = snapshot.val();
-      const arr = Object.keys(data)
-      .filter(i => data[i].approved == true && data[i].driverActiveStatus == true && data[i].location)
-      .map(i => {
-        data[i].id = i;
-        return data[i];
+      let users = [];
+      snapshot.forEach(element => {
+        users.push({
+          key: element.key,
+          name: element.val().name,
+        });
       });
+      // const data = snapshot.val();
+      // const arr = Object.keys(data).map(i => {
+      //   data[i].id = i;
+      //   return data[i];
+      // });
       dispatch({
         type: FETCH_ALL_USERS_SUCCESS,
-        payload: arr
+        payload: {users: users},
       });
     } else {
       dispatch({
-        type: FETCH_ALL_USERS_FAILED,
-        payload: "No users available."
+        type: FETCH_ALL_USERS__FAILED,
+        payload: 'No users available.',
       });
     }
   });
 };
 
-export const addUser = (userdata) => (dispatch) => (firebase) => {
-  const {
-    usersRef
-  } = firebase;
+// export const fetchDrivers = () => (dispatch) => (firebase) => {
 
-  dispatch({
-    type: EDIT_USER,
-    payload: userdata
-  });
+//   const {
+//     usersRef
+//   } = firebase;
 
-  usersRef.push(userdata).then(() => {
-    dispatch({
-      type: EDIT_USER_SUCCESS,
-      payload: null
-    });
-  }).catch((error) => {
-    dispatch({
-      type: EDIT_USER_FAILED,
-      payload: error
-    });
-  });
-}
+//   dispatch({
+//     type: FETCH_ALL_USERS,
+//     payload: null
+//   });
 
-export const editUser = (id, user) => (dispatch) => (firebase) => {
+//   usersRef.orderByChild("queue").equalTo(false).once("value", snapshot => {
+//     if (snapshot.val()) {
+//       const data = snapshot.val();
+//       const arr = Object.keys(data)
+//       .filter(i => data[i].approved == true && data[i].driverActiveStatus == true && data[i].location)
+//       .map(i => {
+//         data[i].id = i;
+//         return data[i];
+//       });
+//       dispatch({
+//         type: FETCH_ALL_USERS_SUCCESS,
+//         payload: arr
+//       });
+//     } else {
+//       dispatch({
+//         type: FETCH_ALL_USERS_FAILED,
+//         payload: "No users available."
+//       });
+//     }
+//   });
+// };
 
-  const {
-    singleUserRef
-  } = firebase;
+// export const addUser = (userdata) => (dispatch) => (firebase) => {
+//   const {
+//     usersRef
+//   } = firebase;
 
-  dispatch({
-    type: EDIT_USER,
-    payload: user
-  });
-  let editedUser = user;
-  delete editedUser.id;
-  singleUserRef(id).set(editedUser).then(() => {
-    dispatch({
-      type: EDIT_USER_SUCCESS,
-      payload: null
-    });
-  }).catch((error) => {
-    dispatch({
-      type: EDIT_USER_FAILED,
-      payload: error
-    });
-  });
-}
+//   dispatch({
+//     type: EDIT_USER,
+//     payload: userdata
+//   });
 
-export const deleteUser = (id) => (dispatch) => (firebase) => {
+//   usersRef.push(userdata).then(() => {
+//     dispatch({
+//       type: EDIT_USER_SUCCESS,
+//       payload: null
+//     });
+//   }).catch((error) => {
+//     dispatch({
+//       type: EDIT_USER_FAILED,
+//       payload: error
+//     });
+//   });
+// }
 
-  const {
-    singleUserRef
-  } = firebase;
+// export const editUser = (id, user) => (dispatch) => (firebase) => {
 
-  dispatch({
-    type: DELETE_USER,
-    payload: id
-  });
+//   const {
+//     singleUserRef
+//   } = firebase;
 
-  singleUserRef(id).remove().then(() => {
-    dispatch({
-      type: DELETE_USER_SUCCESS,
-      payload: null
-    });
-  }).catch((error) => {
-    dispatch({
-      type: DELETE_USER_FAILED,
-      payload: error
-    });
-  });
-}
+//   dispatch({
+//     type: EDIT_USER,
+//     payload: user
+//   });
+//   let editedUser = user;
+//   delete editedUser.id;
+//   singleUserRef(id).set(editedUser).then(() => {
+//     dispatch({
+//       type: EDIT_USER_SUCCESS,
+//       payload: null
+//     });
+//   }).catch((error) => {
+//     dispatch({
+//       type: EDIT_USER_FAILED,
+//       payload: error
+//     });
+//   });
+// }
+
+// export const deleteUser = (id) => (dispatch) => (firebase) => {
+
+//   const {
+//     singleUserRef
+//   } = firebase;
+
+//   dispatch({
+//     type: DELETE_USER,
+//     payload: id
+//   });
+
+//   singleUserRef(id).remove().then(() => {
+//     dispatch({
+//       type: DELETE_USER_SUCCESS,
+//       payload: null
+//     });
+//   }).catch((error) => {
+//     dispatch({
+//       type: DELETE_USER_FAILED,
+//       payload: error
+//     });
+//   });
+// }

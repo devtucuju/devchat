@@ -30,6 +30,7 @@ import {
   changeName,
   changePassword,
 } from '../store/actions/authactions';
+import {getUsers} from '../store/actions/usersactions';
 
 const FirebaseContext = createContext(null);
 
@@ -61,6 +62,7 @@ const FirebaseProvider = ({config, children}) => {
         changeEmail: email => changeEmail(email),
         changeName: name => changeName(name),
         changePassword: password => changePassword(password),
+        getUsers: () => dispatch => getUsers()(dispatch)(firebase),
       },
     };
   }

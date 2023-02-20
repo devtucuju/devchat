@@ -1,8 +1,5 @@
-import React, {useEffect, useRef, useContext} from 'react';
-import {
-  NavigationContainer,
-  useNavigationContainerRef,
-} from '@react-navigation/native';
+import React, {useContext} from 'react';
+import {NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 //Screens

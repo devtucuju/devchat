@@ -1,17 +1,30 @@
 import {useContext, useEffect, useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, FlatList} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {FirebaseContext} from '../../context/firebase';
 
 export function ContactListScreen({navigation}) {
-  const {status, uid} = useSelector(state => state.auth);
+  const {uid} = useSelector(state => state.auth);
+  const {users} = useSelector(state => state.userdata);
   const dispatch = useDispatch();
   const {api} = useContext(FirebaseContext);
-  const {checkLogin} = api;
+  console.log(users);
+  useEffect(() => {
+    dispatch(api?.getUsers());
+  }, []);
 
   return (
     <View style={styles.container}>
-      <Text>CONTATO</Text>
+      <FlatList
+        data={users}
+        renderItem={({item}) => (
+          <View>
+            <Text>
+              {item.key}- {item.name}
+            </Text>
+          </View>
+        )}
+      />
     </View>
   );
 }
