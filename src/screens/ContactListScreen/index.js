@@ -1,6 +1,7 @@
 import {useContext, useEffect, useState} from 'react';
 import {View, Text, StyleSheet, FlatList} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
+import {ContactItem} from '../../components/ContactList/ContactItem';
 import {FirebaseContext} from '../../context/firebase';
 
 export function ContactListScreen({navigation}) {
@@ -8,21 +9,20 @@ export function ContactListScreen({navigation}) {
   const {users} = useSelector(state => state.userdata);
   const dispatch = useDispatch();
   const {api} = useContext(FirebaseContext);
-  console.log(users);
+
   useEffect(() => {
     dispatch(api?.getUsers());
   }, []);
+  function handleContact(item) {
+    alert(item.name);
+  }
 
   return (
     <View style={styles.container}>
       <FlatList
         data={users}
         renderItem={({item}) => (
-          <View>
-            <Text>
-              {item.key}- {item.name}
-            </Text>
-          </View>
+          <ContactItem data={item} onPress={handleContact} />
         )}
       />
     </View>
@@ -32,7 +32,8 @@ export function ContactListScreen({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingHorizontal: 20,
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
 });

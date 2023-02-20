@@ -5,6 +5,7 @@ import {
   FETCH_ALL_USERS_STATIC,
   FETCH_ALL_USERS_STATIC_SUCCESS,
   FETCH_ALL_USERS_STATIC_FAILED,
+  USER_SIGN_OUT,
 } from '../types';
 
 export const INITIAL_STATE = {
@@ -40,6 +41,8 @@ export const usersreducer = (state = INITIAL_STATE, action) => {
           msg: action.payload,
         },
       };
+    case USER_SIGN_OUT:
+      return INITIAL_STATE;
     case FETCH_ALL_USERS_STATIC:
       return {
         ...state,
