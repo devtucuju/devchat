@@ -32,14 +32,16 @@ export function PreloadScreen({navigation}) {
   };
 
   useEffect(() => {
-    dispatch(api?.checkLogin());
-    directPages();
+    if (api) {
+      dispatch(api?.checkLogin());
+      directPages();
+    }
   }, [status]);
 
   if (isLoading) {
     return (
       <View style={styles.container}>
-        <ActivityIndicator />
+        <ActivityIndicator size={'large'} color="#000" />
       </View>
     );
   }

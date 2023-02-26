@@ -31,6 +31,7 @@ import {
   changePassword,
 } from '../store/actions/authactions';
 import {getUsers} from '../store/actions/usersactions';
+import {addChat} from '../store/actions/chatactions';
 
 const FirebaseContext = createContext(null);
 
@@ -63,6 +64,7 @@ const FirebaseProvider = ({config, children}) => {
         changeName: name => changeName(name),
         changePassword: password => changePassword(password),
         getUsers: () => dispatch => getUsers()(dispatch)(firebase),
+        addChat: userChat => dispatch => addChat(userChat)(dispatch)(firebase),
       },
     };
   }

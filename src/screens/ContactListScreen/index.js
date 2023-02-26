@@ -13,8 +13,9 @@ export function ContactListScreen({navigation}) {
   useEffect(() => {
     dispatch(api?.getUsers());
   }, []);
+
   function handleContact(item) {
-    alert(item.name);
+    dispatch(api?.addChat(item.key));
   }
 
   return (

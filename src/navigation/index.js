@@ -16,7 +16,6 @@ const Drawer = createDrawerNavigator();
 
 export function Router() {
   const auth = useSelector(state => state.auth);
-  const {api} = useContext(FirebaseContext);
 
   return (
     <NavigationContainer>

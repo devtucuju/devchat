@@ -43,20 +43,22 @@ import {
 // };
 
 export const getUsers = () => dispatch => firebase => {
-  const {usersRef} = firebase;
-
+  const {usersRef, auth} = firebase;
+  const userLogged = auth.currentUser.uid;
   dispatch({
     type: FETCH_ALL_USERS,
     payload: null,
   });
-  usersRef.once('value', snapshot => {
+  usersRef.orderByChild('name').once('value', snapshot => {
     if (snapshot.val()) {
       let users = [];
       snapshot.forEach(element => {
-        users.push({
-          key: element.key,
-          name: element.val().name,
-        });
+        if (element.key !== userLogged) {
+          users.push({
+            key: element.key,
+            name: element.val().name,
+          });
+        }
       });
       // const data = snapshot.val();
       // const arr = Object.keys(data).map(i => {
@@ -69,7 +71,7 @@ export const getUsers = () => dispatch => firebase => {
       });
     } else {
       dispatch({
-        type: FETCH_ALL_USERS__FAILED,
+        type: FETCH_ALL_USERS_FAILED,
         payload: 'No users available.',
       });
     }
