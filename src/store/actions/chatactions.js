@@ -4,6 +4,7 @@ import {
   FETCH_MESSAGES_FAILED,
   SEND_MESSAGE,
   STOP_FETCH_MESSAGES,
+  SET_ACTIVE_CHAT,
 } from '../types';
 import store from '../store';
 // import {RequestPushMsg} from '../other/NotificationFunctions';
@@ -110,16 +111,18 @@ export const addChat = userChat => dispatch => firebase => {
 
   let chatId = newChat.key;
 
-  usersRef.child(userLogged).child(chats).child(chatId).set({
+  usersRef.child(userLogged).child('chats').child(chatId).set({
     id: chatId,
   });
 
-  usersRef.child(userChat).child(chats).child(chatId).set({
+  usersRef.child(userChat).child('chats').child(chatId).set({
     id: chatId,
   });
 
-  //   dispatch({
-  //     type: STOP_FETCH_MESSAGES,
-  //     payload: bookingId,
-  //   });
+  dispatch({
+    type: SET_ACTIVE_CHAT,
+    payload: {
+      chatId,
+    },
+  });
 };

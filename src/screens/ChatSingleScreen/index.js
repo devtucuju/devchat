@@ -3,20 +3,13 @@ import {View, Text, StyleSheet, FlatList} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {FirebaseContext} from '../../context/firebase';
 
-export function ChatListScreen({navigation}) {
+export function ChatSingleScreen({navigation}) {
   const {status, uid} = useSelector(state => state.auth);
-  const {activeChat} = useSelector(state => state.chatdata);
   const {users} = useSelector(state => state.userdata);
 
   const dispatch = useDispatch();
   const {api} = useContext(FirebaseContext);
   const {checkLogin} = api;
-
-  useEffect(() => {
-    if (activeChat !== '') {
-      navigation.navigate('ChatSingle');
-    }
-  }, [activeChat]);
 
   return (
     <View style={styles.container}>

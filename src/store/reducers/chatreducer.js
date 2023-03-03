@@ -4,10 +4,12 @@ import {
   FETCH_MESSAGES_FAILED,
   SEND_MESSAGE,
   STOP_FETCH_MESSAGES,
+  SET_ACTIVE_CHAT,
 } from '../types';
 
 const INITIAL_STATE = {
   messages: [],
+  activeChat: '',
   loading: false,
   error: {
     flag: false,
@@ -17,16 +19,10 @@ const INITIAL_STATE = {
 
 export const chatreducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case FETCH_MESSAGES:
+    case SET_ACTIVE_CHAT:
       return {
         ...state,
-        loading: true,
-      };
-    case FETCH_MESSAGES_SUCCESS:
-      return {
-        ...state,
-        messages: action.payload,
-        loading: false,
+        activeChat: action.payload.chatId,
       };
     case FETCH_MESSAGES_FAILED:
       return {

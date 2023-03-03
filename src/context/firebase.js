@@ -52,6 +52,7 @@ const FirebaseProvider = ({config, children}) => {
       auth: app.auth(),
       authRef: app.auth(),
       usersRef: app.database().ref('users'),
+      chatRef: app.database().ref('chats'),
       singleUserRef: uid => app.database().ref('users/' + uid),
       api: {
         checkLogin: () => dispatch => checkLogin()(dispatch)(firebase),

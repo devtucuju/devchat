@@ -246,6 +246,7 @@ export const signIn = (email, password) => dispatch => firebase => {
       });
     })
     .catch(error => {
+      console.log(error);
       switch (error.code) {
         case 'auth/user-disabled':
           alert('Usuário desativado');

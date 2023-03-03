@@ -16,6 +16,7 @@ export function ContactListScreen({navigation}) {
 
   function handleContact(item) {
     dispatch(api?.addChat(item.key));
+    navigation.navigate('ChatStack');
   }
 
   return (
